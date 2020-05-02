@@ -14,7 +14,7 @@ if(!accountBalance) {
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
-        <Grid item xs={12} md={3} component={Card} className={cx(styles.card, styles.infected)}>
+        <Grid item xs={12} md={6} lg={3} component={Card} className={cx(styles.card, styles.infected)}>
           <CardContent>
             <Typography color="textSecondary" gutterBottom>
               Infected
@@ -23,7 +23,41 @@ if(!accountBalance) {
               <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
             </Typography>
             <Typography color="textSecondary">
-
+            { accountBalance } 
+            </Typography>
+            <Typography variant="body2" component="p">
+              My awesome card
+            </Typography>
+          </CardContent>
+          <AudiotrackSharpIcon/>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3} component={Card} className={cx(styles.card, styles.infected)}>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Infected
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
+            </Typography>
+            <Typography color="textSecondary">
+            { accountBalance } 
+            </Typography>
+            <Typography variant="body2" component="p">
+              My awesome card
+            </Typography>
+          </CardContent>
+          <AudiotrackSharpIcon/>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3} component={Card} className={cx(styles.card, styles.infected)}>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Infected
+            </Typography>
+            <Typography variant="h5" component="h2">
+              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
+            </Typography>
+            <Typography color="textSecondary">
+            { accountBalance } 
             </Typography>
             <Typography variant="body2" component="p">
               My awesome card

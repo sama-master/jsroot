@@ -2,15 +2,15 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CountUp from 'react-countup';
-import axios from 'axios';
 import { Cards, Drop } from './components';
 
 
-const proxyurl = "https://cors-anywhere.herokuapp.com/";
+import axios from 'axios';
+
 const url = 'https://api.samabusiness.sa/api/accounts/2';
 export const fetchStore = async () => {
   try {
-    const { data } = await axios.get(`${proxyurl + url}`);
+    const { data } = await axios.get(`${url}`);
     
       return data;
 
