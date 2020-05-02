@@ -7,7 +7,7 @@ import { Cards, Drop } from './components';
 
 
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const url = 'https://api.samabusiness.sa/api/Payments/1';
+const url = 'https://api.samabusiness.sa/api/accounts/2';
 export const fetchStore = async () => {
   try {
     const { data } = await axios.get(`${proxyurl + url}`);
@@ -30,8 +30,8 @@ class App extends React.Component {
     const stores = await fetchStore();
     this.setState({ stores });
 
-    const { senderName, receiverName, transactionAmount, bankName } = stores;
-console.log(senderName, receiverName, transactionAmount, bankName);
+    const { senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber } = stores;
+console.log(senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber);
   }
 
 
@@ -50,7 +50,7 @@ console.log(senderName, receiverName, transactionAmount, bankName);
 
   render() {
     const { stores } = this.state;
-    const { senderName, receiverName, transactionAmount, bankName } = stores;
+    const { senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber } = stores;
 
     return (
       <div className="App">
@@ -61,14 +61,19 @@ console.log(senderName, receiverName, transactionAmount, bankName);
           </p>
           <Cards data={stores} />
           <Drop data={stores} />
-          From: {senderName} To: {receiverName} Amount: {transactionAmount} Via: {bankName}
+          From: {senderName}
+          To: {receiverName}
+          Amount: {transactionAmount}.00
+          <CountUp start={0} end={ accountBalance } duration={3}  />
+          Via: {accountBalance}
+          {accountNumber}
           <a
             className="App-link"
             href="https://reactjs.org"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <CountUp start={0} end={65488} duration={3} separator="," />
+            
             
           </a>
           <p>Clients</p>

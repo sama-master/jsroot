@@ -6,9 +6,11 @@ import AudiotrackSharpIcon from '@material-ui/icons/AudiotrackSharp';
 
 import styles from './Cards.module.css';
 
-const Cards = ({ id }) => {
+const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => {
 
-
+if(!accountBalance) {
+  return 'Loading . . .';
+}
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -18,10 +20,10 @@ const Cards = ({ id }) => {
               Infected
             </Typography>
             <Typography variant="h5" component="h2">
-              <code>+ </code><CountUp start={0} end={500} duration={2.75} separator="," />
+              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
             </Typography>
             <Typography color="textSecondary">
-            {id}
+
             </Typography>
             <Typography variant="body2" component="p">
               My awesome card
