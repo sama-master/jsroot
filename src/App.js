@@ -1,26 +1,50 @@
 import React from 'react';
-import logo from './logo.svg';
+/*import logo from './logo.svg';*/
 import './App.css';
 import CountUp from 'react-countup';
-import { Cards, Drop } from './components';
-
+import { Cards, Drop, Boxes, Logo } from './components';
+import SettingsIcon from '@material-ui/icons/Settings';
+import serviceworker from './scope/serviceworker';
+import NoSsr from '@material-ui/core/NoSsr';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { palette, spacing, typography } from '@material-ui/system';
 
 import axios from 'axios';
 
+import Box from '@material-ui/core/Box';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
+
+const WrappedIcon = (props) => <Icon {...props} />;
+WrappedIcon.muiName = 'Icon';
+
+
+
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = 'https://api.samabusiness.sa/api/accounts/2';
 export const fetchStore = async () => {
   try {
-    const { data } = await axios.get(`${url}`);
+    const { data } = await axios.get(`${proxyurl + url}`);
     
       return data;
-
     
   } catch (error) {
     return error;
   }
 };
-
-
+/*
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://platform.clickatell.com/messages/http/send?apiKey=vz3Kf63gTdiC-Ch2JmBQfQ==&to=966562204816&content=It's been 5 years since I started coding,",
+"&#119136;started from the bottom, now we're here.",
+"&#119136;Look at me now,",
+"I just can't get enough </>", true);
+xhr.onreadystatechange = function(){
+    if (xhr.readyState == 4 && xhr.status == 200){
+        console.log('success')
+    }
+};
+xhr.send();
+console.log(xhr)*/
 
 class App extends React.Component {
   state = {
@@ -30,8 +54,8 @@ class App extends React.Component {
     const stores = await fetchStore();
     this.setState({ stores });
 
-    const { senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber } = stores;
-console.log(senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber);
+    const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
+console.log(senderName, accountBalance, receiverName, transactionAmount, accountNumber);
   }
 
 
@@ -50,15 +74,48 @@ console.log(senderName, accountBalance, receiverName, transactionAmount, bankNam
 
   render() {
     const { stores } = this.state;
-    const { senderName, accountBalance, receiverName, transactionAmount, bankName, accountNumber } = stores;
+    const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
 
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+        <SettingsIcon className="App-logo"  /> <span>Master REPO</span>
           <p>
-          &#119136;
+
           </p>
+          <Logo />
+
+          <a
+            className="App-link"
+            href="https://master.samabusiness.sa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+          </a>
+          <p>Clients</p>
+
+          <NoSsr>
+    <Box fontFamily="Monospace"
+     letterSpacing={6}
+      color="primary.main"
+      bgcolor="background.paper"
+      fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }}
+      p={{ xs: 2, sm: 3, md: 4 }}
+    >
+      @material-ui/system
+    </Box>
+</NoSsr>
+        </header>
+
+        
+        <IconButton>
+            <SettingsIcon />
+          </IconButton>
+          <IconButton>
+          <SettingsIcon />
+          </IconButton>
+
+          <Boxes />
           <Cards data={stores} />
           <Drop data={stores} />
           From: {senderName}
@@ -67,19 +124,6 @@ console.log(senderName, accountBalance, receiverName, transactionAmount, bankNam
           <CountUp start={0} end={ accountBalance } duration={3}  />
           Via: {accountBalance}
           {accountNumber}
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            
-            
-          </a>
-          <p>Clients</p>
-
-          
-        </header>
       </div>
     );
   }

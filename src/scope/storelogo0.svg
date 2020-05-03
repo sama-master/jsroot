@@ -1,0 +1,43 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65.64 90.45">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: #020220;
+      }
+
+      .cls-2 {
+        fill: #ddd;
+        stroke: #020220;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-miterlimit: 10;
+        stroke-width: 0.5px;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+      }
+
+      .cls-4, .cls-5 {
+        isolation: isolate;
+        font-size: 15.72px;
+        font-family: CambriaMath, Cambria Math;
+      }
+
+      .cls-5 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M124.14,43.05,93.25,73.94a1.67,1.67,0,0,1-2.37,0L75.43,58.5,92.06,41.87,75.43,25.24,90.88,9.79a1.68,1.68,0,0,1,2.37,0l30.89,30.89A1.67,1.67,0,0,1,124.14,43.05Z" transform="translate(-59.25 -9.05)"/>
+  <path class="cls-2" d="M92.06,41.87,75.43,58.5h0L60,43.05a1.67,1.67,0,0,1,0-2.37L75.43,25.24Z" transform="translate(-59.25 -9.05)"/>
+  <path class="cls-3" d="M124.14,43.05,93.25,73.94a1.67,1.67,0,0,1-2.37,0L75.43,58.5,92.06,41.87,75.43,25.24,90.88,9.79a1.68,1.68,0,0,1,2.37,0l30.89,30.89A1.67,1.67,0,0,1,124.14,43.05Z" transform="translate(-59.25 -9.05)"/>
+  <line class="cls-3" x1="49.45" y1="49.45" x2="32.82" y2="32.82"/>
+  <line class="cls-3" x1="49.45" y1="16.19" x2="32.82" y2="32.82"/>
+  <text class="cls-4" transform="translate(11.87 38.35)">Σ</text>
+  <text class="cls-5" transform="translate(28.52 51.71)">μ</text>
+  <text class="cls-5" transform="translate(28.17 20.17)">ά</text>
+  <text class="cls-5" transform="translate(44.86 36.63)">ά</text>
+</svg>

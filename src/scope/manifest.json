@@ -1,0 +1,30 @@
+{
+    "name": "Sigma Store®",
+    "short_name": "ΣStore®",
+    "dir": "rtl",
+    "lang": "ar",
+    "start_url": "../",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    " background_color " : " #fff " ,
+    "description": "اكبر موقع سعودي معتمد من هيئة الاتصالات وتقنية المعلومات لبيع وشراء مختلف المنتجات.",
+    "icons": [{
+        "src": "https://cdn.samabusiness.sa/v1/images/sigmastoreicon.png",
+        "sizes": "180x180",
+        "type": "image / png"
+    },
+    {
+        "src": "https://cdn.samabusiness.sa/v1/images/144x144.png",
+        "sizes": "144x144",
+        "type": "image / png"
+    }],
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=com.sigmastore.app",
+            "id": "com.sigmastore.app"
+        }, {
+            "platform": "itunes",
+            "url": "https://itunes.apple.com/app/com.sigmastore.app/id123456789"
+        }]
+}

@@ -46,7 +46,7 @@ if(!accountBalance) {
               My awesome card
             </Typography>
           </CardContent>
-          <AudiotrackSharpIcon/>
+          <AudiotrackSharpIcon className="App-logo"/>
         </Grid>
         <Grid item xs={12} md={6} lg={3} component={Card} className={cx(styles.card, styles.infected)}>
           <CardContent>
