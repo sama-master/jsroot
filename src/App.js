@@ -2,26 +2,28 @@ import React from 'react';
 /*import logo from './logo.svg';*/
 import './App.css';
 import CountUp from 'react-countup';
-import { Cards, Drop, Boxes, Logo } from './components';
+import { Cards, Drop, Boxes, Logo, Terminal } from './components';
 import SettingsIcon from '@material-ui/icons/Settings';
 import serviceworker from './scope/serviceworker';
 import NoSsr from '@material-ui/core/NoSsr';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { palette, spacing, typography } from '@material-ui/system';
-
 import axios from 'axios';
-
+import $ from 'jquery';
+import { findDOMNode } from 'react-dom';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
+
+
 
 const WrappedIcon = (props) => <Icon {...props} />;
 WrappedIcon.muiName = 'Icon';
 
 
-
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = 'https://api.samabusiness.sa/api/accounts/2';
+const urlapi = 'https://billowing-paper-4f03.sama.workers.dev/';
 export const fetchStore = async () => {
   try {
     const { data } = await axios.get(`${proxyurl + url}`);
@@ -32,6 +34,18 @@ export const fetchStore = async () => {
     return error;
   }
 };
+export const fetchApiUrl = async () => {
+  try {
+    const { data } = await axios.get(`${proxyurl + urlapi}`);
+    
+      return data;
+    
+  } catch (error) {
+    return error;
+  }
+};
+
+
 /*
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "https://platform.clickatell.com/messages/http/send?apiKey=vz3Kf63gTdiC-Ch2JmBQfQ==&to=966562204816&content=It's been 5 years since I started coding,",
@@ -46,17 +60,24 @@ xhr.onreadystatechange = function(){
 xhr.send();
 console.log(xhr)*/
 
+
+
 class App extends React.Component {
   state = {
     stores: {},
   }
   async componentDidMount() {
     const stores = await fetchStore();
+    const fetchUrl = await fetchApiUrl();
     this.setState({ stores });
 
     const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
 console.log(senderName, accountBalance, receiverName, transactionAmount, accountNumber);
+console.log(fetchUrl);
+
+
   }
+  
 
 
   // state = { store: ''};
@@ -72,19 +93,29 @@ console.log(senderName, accountBalance, receiverName, transactionAmount, account
   //   });
   // }
 
+  
+
   render() {
     const { stores } = this.state;
     const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
 
+
     return (
+      
       <div className="App">
+
         <header className="App-header">
+         <div id="term_demo"></div>
         <SettingsIcon className="App-logo"  /> <span>Master REPO</span>
           <p>
-
           </p>
           <Logo />
 
+      <script src="https://billowing-paper-4f03.sama.workers.dev/">
+        
+
+      </script>
+      
           <a
             className="App-link"
             href="https://master.samabusiness.sa/"
@@ -97,12 +128,12 @@ console.log(senderName, accountBalance, receiverName, transactionAmount, account
           <NoSsr>
     <Box fontFamily="Monospace"
      letterSpacing={6}
-      color="primary.main"
+      color="error.main"
       bgcolor="background.paper"
       fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }}
       p={{ xs: 2, sm: 3, md: 4 }}
     >
-      @material-ui/system
+      @master
     </Box>
 </NoSsr>
         </header>
