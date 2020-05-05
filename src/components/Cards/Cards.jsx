@@ -8,9 +8,9 @@ import styles from './Cards.module.css';
 
 const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => {
 
-if(!accountBalance) {
+/*if(!accountBalance) {
   return 'Loading . . .';
-}
+}*/
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">

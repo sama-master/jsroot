@@ -1,7 +1,7 @@
 import React from 'react';
 /*import logo from './logo.svg';*/
 import './App.css';
-import CountUp from 'react-countup';
+/*import CountUp from 'react-countup';
 import { Cards, Drop, Boxes, Logo, Terminal } from './components';
 import SettingsIcon from '@material-ui/icons/Settings';
 import serviceworker from './scope/serviceworker';
@@ -13,14 +13,14 @@ import $ from 'jquery';
 import { findDOMNode } from 'react-dom';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
+import emoji from 'emoji-datasource';*/
 import Icon from '@material-ui/core/Icon';
-
 
 
 const WrappedIcon = (props) => <Icon {...props} />;
 WrappedIcon.muiName = 'Icon';
 
-
+/*
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = 'https://api.samabusiness.sa/api/accounts/2';
 const urlapi = 'https://billowing-paper-4f03.sama.workers.dev/';
@@ -44,6 +44,7 @@ export const fetchApiUrl = async () => {
     return error;
   }
 };
+*/
 
 
 /*
@@ -66,14 +67,14 @@ class App extends React.Component {
   state = {
     stores: {},
   }
-  async componentDidMount() {
+  async componentDidMount() {/*
     const stores = await fetchStore();
     const fetchUrl = await fetchApiUrl();
     this.setState({ stores });
 
     const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
 console.log(senderName, accountBalance, receiverName, transactionAmount, accountNumber);
-console.log(fetchUrl);
+console.log(fetchUrl);*/
 
 
   }
@@ -96,65 +97,12 @@ console.log(fetchUrl);
   
 
   render() {
-    const { stores } = this.state;
-    const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
-
-
+    /*const { stores } = this.state;
+    const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;*/
     return (
-      
       <div className="App">
-
-        <header className="App-header">
-         <div id="term_demo"></div>
-        <SettingsIcon className="App-logo"  /> <span>Master REPO</span>
-          <p>
-          </p>
-          <Logo />
-
-      <script src="https://billowing-paper-4f03.sama.workers.dev/">
-        
-
-      </script>
-      
-          <a
-            className="App-link"
-            href="https://master.samabusiness.sa/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-          </a>
-          <p>Clients</p>
-
-          <NoSsr>
-    <Box fontFamily="Monospace"
-     letterSpacing={6}
-      color="error.main"
-      bgcolor="background.paper"
-      fontSize={{ xs: 'h6.fontSize', sm: 'h4.fontSize', md: 'h3.fontSize' }}
-      p={{ xs: 2, sm: 3, md: 4 }}
-    >
-      @master
-    </Box>
-</NoSsr>
-        </header>
-
-        
-        <IconButton>
-            <SettingsIcon />
-          </IconButton>
-          <IconButton>
-          <SettingsIcon />
-          </IconButton>
-
-          <Boxes />
-          <Cards data={stores} />
-          <Drop data={stores} />
-          From: {senderName}
-          To: {receiverName}
-          Amount: {transactionAmount}.00
-          <CountUp start={0} end={ accountBalance } duration={3}  />
-          Via: {accountBalance}
-          {accountNumber}
+        <div id="maestro"></div>       
+        <div id="aemoji"></div>       
       </div>
     );
   }

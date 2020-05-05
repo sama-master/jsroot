@@ -3,18 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-coy.css"/>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jcubic/jquery.terminal@e749fb465138f3e129b7d3478313b9864edfc346/css/jquery.terminal.min.css"/>-->
+    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal@2.x.x/css/jquery.terminal.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/cupertino/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/shell.js@1.0.5/dist/css/shell.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/emoji.css"/>
+   
+<!-- -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,15 +38,172 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://unpkg.com/jquery.terminal@2.x.x/js/jquery.terminal.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/jquery.terminal@2.x.x/css/jquery.terminal.min.css"/>
+    <script src="https://unpkg.com/js-polyfills/keyboard.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/autocomplete_menu.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jcubic/static/js/wcwidth.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jcubic/jquery.terminal@devel/js/jquery.terminal.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/less.js"></script>
+    <script src="https://unpkg.com/prismjs@1.8.1/prism.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.mousewheel-min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!--<script src="https://codepen.io/jcubic/pen/WZjbgq.js?v=5"></script>-->
+    <script src="https://unpkg.com/resize-observer-polyfill@1.5.1/dist/ResizeObserver.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aaronbarker/css-variables-polyfill@master/css-var-polyfill.js"></script>
+    <script src="https://unpkg.com/jquery.terminal@2.1.2/js/emoji.js"></script>
+
+        
+
+    <script src="https://unpkg.com/ansidec@0.2.1/iconv.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/nvdnkpr/ansilove.js/ansilove.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/unix_formatting.js"></script>
+    <script src="https://codepen.io/jcubic/pen/vbEzXw.js"></script>
+    
+    <style>
+      .dialog {
+          --size: 1.5;
+      }
+      body {
+        min-height: 100vh;
+        color: var(--color, #aaa);
+        background-color: var(--background, #000);
+        padding: 10px;
+        box-sizing: border-box;
+       
+          }
+      pre, body, .cmd {
+        margin: 10px;
+        margin: 10px;
+          }
+      pre, .cmd {
+        line-height: 14px;
+        font-size: 12px;
+        --color: lime;
+          }
+
+          pre, #maestro, body, .terminal-output, .cmd {
+            text-align: left;
+          }
+
+
+          form {
+    margin: 10px;
+}
+body .shell {
+    width: 400px;
+    height: 200px;
+}
+body .shell .terminal {
+    height: calc(100% - 29px);
+    padding: 10px;
+    --size: 1.1;
+    /*
+     * padding bottom 0 on terminal and margin
+     * on .cmd will be in version 2.0.1
+     * that fixes FireFox issue
+     */
+    padding-bottom: 0;
+}
+body .shell .terminal .cmd {
+    margin-bottom: 10px;
+}
+.shell .typed-cursor, .shell .cursor {
+    background: transparent;
+}
+.shell > .status-bar .title {
+    cursor: move;
+}
+/*
+ * fix to shell.js to center title to free space
+ */
+.shell.windows .status-bar .title {
+    right: 106px;
+}
+@supports (--css: variables) {
+    .shell .terminal {
+        --color: #aaa;
+    }
+    .shell.ubuntu .terminal {
+        --background: #300924;
+    }
+    .shell.osx .content.terminal {
+        --background: #222;
+    }
+    .shell.light .content.terminal {
+        --background: white;
+        --color: black;
+    }
+    /*
+    * windows and custom are the last ones so
+    * they don't get overwritten by light
+    */
+    .shell.windows .content.terminal {
+        --background: black;
+        --color: white;
+        --animation: terminal-underline;
+    }   
+    .shell.custom .content.terminal {
+        --background: #292929;
+        --color: #aaa;
+    }
+}
+/*
+ * overwrite shell.js style because shell.js   
+ * selectors are stronger then terminal ones
+ */
+.cmd span.cursor {
+    animation: none;
+    width: auto;
+    background-color: var(--background, #000);
+}
+.shell terminal.content,
+.shell.osx.dark .content,
+.shell.ubuntu .content {
+    background-color: var(--background, #222) !important;
+}
+.shell .terminal.content {
+    font-size: 12px;
+}
+.cmd {
+    background-color: inherit;
+}
+@supports (--css: variables) {
+    .shell .terminal.content {
+        font-size: calc(var(--size, 1) * 12px);
+    }
+}
+/* fix for Firefox */
+.terminal > .resizer, .terminal > .font .resizer {
+    visibility: visible;
+    pointer-events: none;
+}
+.terminal::-webkit-scrollbar-track
+{
+	border: 1px solid var(--color, #aaa);
+	background-color: var(--background);
+}
+.terminal::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: var(--background);
+}
+.terminal::-webkit-scrollbar-thumb
+{
+	background-color: var(--color, #aaa);
+}
+     </style>
+
     </head>
     <title>Master App</title>
   </head>
   <body>    
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
+
     <div id="root"></div>
 
+
+
+  
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -47,26 +215,229 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-<script>
-  jQuery(function($, undefined) {
-  $('#term_demo').terminal(function(command) {
-    if (command !== '') {
-        var result = window.eval(command);
-        if (result != undefined) {
-            this.echo(String(result));
+
+
+
+
+
+
+    <script>
+      
+
+
+var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
+
+(async function() {
+    function get(url) {
+        return fetch(url).then(res => res.text()).then(text=>text.trim());
+    }
+    var files = (await get(url + '?action=ls')).split('\n');
+    function get_ansi(name) {
+        return fetch(url + '?raw=1&file=' + name).
+            then(res => res.arrayBuffer()).then(a => new Uint8Array(a));
+    }
+    function echo_ansi(buff) {
+        var meta = AnsiLove.sauceBytes(buff);
+        var cols = 80;
+        var str = iconv.decode(buff, 'CP437');
+        // remove code that move cursor after new line - hope this works
+        str = str.replace(/\r?\n?\x1b\[A\x1b\[[0-9]+C/g, '');
+        // main code - this will use unix_formatting file to format ANSI artwork
+        str = $.terminal.apply_formatters(str, {});
+        if (meta) {
+            if (str.match(/\x1a/)) { // 26 - end of file in DOS
+                str = str.replace(/\x1a.*/, '');
+            }
+            console.log(meta);
+            cols = meta.tInfo1;
+            var lines = $.terminal.split_equal(str, cols);
+            // one flush to output whole image to the screen
+            lines.map(line => term.echo(line, {flush: false}));
+            term.flush();
+        } else {
+            // should we wrap to 80 cols if there is no meta SAUCE data?
+            term.echo(str);
+        }
+        term.resume();
+    }
+
+    var term = $('#headter').terminal({
+        help: function() {
+            this.echo([
+                'use [[;#888;]ls] to display list of files and [[;#888;]cat]',
+                ' to display the artwork, you can also [[u;;]drag and drop] the file.',
+                '\nOnly Code Page 437 encoding files will work (classic demo s',
+                'cene files).\nType [[;#888;]credits] to show credits for ANSI',
+                ' Art works. Use tab so you don\'t need to type whole filename.',
+                '\nType [[;#888;]clear] to clear terminal.'
+            ].join(''), {keepWords: true});
+        },
+        cat: function(name) {
+            this.pause();
+            get_ansi(name).then(echo_ansi);
+        },
+        ls: function() {
+            console.log(files);
+            this.echo(files);
+        },
+        credits: function() {
+            this.echo('ANSI artworks taken from [[!;;;;https://fuel.wtf/packs/fuel27/]fuel magazine]')
+        }
+    }, {
+        completion: function(string, callback) {
+            if (this.get_command().match(/^cat /)) {
+                callback(files);
+            } else {
+                callback(['ls', 'file', 'credits', 'help']);
+            }
+        },
+        outputLimit: 250,
+        greetings: 'ANSI ART Terminal viewer\nType [[;#888;]help] for more info\n',
+        name: 'ansi'
+    }).drop(function(array_buff) { // drop plugin
+        echo_ansi(new Uint8Array(array_buff));
+        return term.read('press enter to continue ');
+    }, {
+        type: 'arraybuffer',
+        error: function(e) {
+            term.exception(e);
+        },
+        complete: function() {
+            term.echo('all files rendered');
+        }
+    });
+})();
+
+
+  var term;
+  jQuery(function($) {
+      var id = 1;
+      term = $('#aemoji').terminal(function(command, term) {
+
+
+        $.get('https://unpkg.com/emoji-datasource').then($.terminal.emoji);
+        var term = $('#aemoji').terminal(function(command) {
+    this.echo('you typed ' + JSON.stringify(command), {
+        formatters: false
+    });
+}, {
+    name: 'emoji',
+    // detect iframe codepen preview
+    enabled: $('#aemoji').attr('onload') === undefined,
+    onInit: function() {
+        // in Window 10 it will render 8️⃣ as icon
+        // in other browsers you may render it as
+        // text
+        this.echo('type &#58;smiley&#58; or &#58;&#41; to render emoji :smiley:')
+            .echo('<span>You can also paste Unicode codepoints that create emoji ' +
+                  'like 8️⃣ to render <span style="width: 2ch" class="emoji eight" '+
+                  'data-text="8️⃣">8️⃣</span></span>', {raw: true, finalize: function(div) {
+                      div.removeClass('raw');
+                  }})
+            .echo('you need to wait a moment while we fetch emoji data')
+            .echo('to see available emoji type &#58;&lt;CHAR(S)&gt; and press tab twice')
+    },
+    completion: function(string, callback) {
+        if (string.match(/^:/)) {
+            callback(names.map(function(name) {
+                return ':' + name + ':';
+            }));
         }
     }
-  }, {
-    greetings: 'Microbot Systems®',
-    name: 'js_demo',
-    height: 630,
-    width: 1340,
-    prompt: 'master@samabusiness.sa:~$ '
-  });
-  });
-</script>
+});
 
 
-   
-    </body
-  ></html>
+
+        
+          if (command == 'help') {
+              term.echo("available commands are mysql, js, master");
+          } else if (command == 'master'){
+            
+            term.echo('Microbot Systems® - ^D to go back - Commands: ~$ help . ~$ admin . ~$ login . ~$ apikeys');
+              term.push(function(command, term) {
+                  if (command == '?') {
+                      term.echo('help msg');
+                  } else if (command == 'h') {
+                      term.echo('help msg2');
+                  }  else if (command == 'ping') {
+                      term.echo('pong');
+                  }  else if (command == 'srv') {
+                      term.echo('Web Development - 100$\nRESTFUL API - 500$        ');
+                  } else {
+                      term.echo('unknown command ' + command);
+                  }
+              }, {
+                  autocompleteMenu: true,
+                  completion: ['foo', 'bar', 'baz'],
+                  prompt: 'master@samabusiness.sa:~$ ',
+                  name: 'master',
+              });
+          } else if (command == "js") {
+              term.push(function(command, term) {
+                  var result = window.eval(command);
+                  if (result != undefined) {
+                      term.echo(String(result));
+                  }
+              }, {
+                  name: 'js',
+                  prompt: 'js> '
+              });
+          } else if (command == 'mysql') {
+              term.push(function(command, term) {
+                  term.pause();
+                  $.jrpc("mysql-rpc-demo.php",
+                         "query",
+                         [command],
+                         function(data) {
+                             term.resume();
+                             if (data.error) {
+                                 if (data.error.error && data.error.error.message) {
+                                     term.error(data.error.error.message);
+                                 } else if (data.error.message) {
+                                     term.error(data.error.message);
+                                 }
+                             } else {
+                                 if (typeof data.result == 'boolean') {
+                                     term.echo(data.result ? 'success' : 'fail');
+                                 } else {
+                                     var len = data.result.length;
+                                     for(var i=0;i<len; ++i) {
+                                         term.echo(data.result[i].join(' | '));
+                                     }
+                                 }
+                             }
+                         },
+                         function(xhr, status, error) {
+                             term.error('[AJAX] ' + status +
+                                        ' - Server reponse is: \n' +
+                                        xhr.responseText);
+                             term.resume();
+                         });
+              }, {
+                  greetings: "This is example of using mysql from terminal\n\
+  you are allowed to execute: select, insert, update and delete from/to table:\n\
+      table master(integer_value integer, varchar_value varchar(255))",
+                  prompt: "mysql> "});
+          } else {
+              term.echo("unknow command " + command);
+          }
+      }, {
+        greetings: 'Microbot Systems® - Commands: ~$ master . ~$ cdn . ~$ dev . ~$ api . ~$ store',
+        width: '100%',
+
+          onBlur: function() {
+              // prevent loosing focus
+              return false;
+          }
+      });
+  });
+
+
+  
+      
+      
+
+    </script>
+      
+    </body>
+</html>

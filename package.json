@@ -12,6 +12,7 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "cli-cursor": "^3.1.0",
+    "emoji-datasource": "^5.0.1",
     "jquery": "^3.5.0",
     "jquery.terminal": "^2.15.4",
     "react": "^16.13.1",
