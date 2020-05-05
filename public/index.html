@@ -225,90 +225,6 @@ body .shell .terminal .cmd {
       
 
 
-var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
-
-(async function() {
-    function get(url) {
-        return fetch(url).then(res => res.text()).then(text=>text.trim());
-    }
-    var files = (await get(url + '?action=ls')).split('\n');
-    function get_ansi(name) {
-        return fetch(url + '?raw=1&file=' + name).
-            then(res => res.arrayBuffer()).then(a => new Uint8Array(a));
-    }
-    function echo_ansi(buff) {
-        var meta = AnsiLove.sauceBytes(buff);
-        var cols = 80;
-        var str = iconv.decode(buff, 'CP437');
-        // remove code that move cursor after new line - hope this works
-        str = str.replace(/\r?\n?\x1b\[A\x1b\[[0-9]+C/g, '');
-        // main code - this will use unix_formatting file to format ANSI artwork
-        str = $.terminal.apply_formatters(str, {});
-        if (meta) {
-            if (str.match(/\x1a/)) { // 26 - end of file in DOS
-                str = str.replace(/\x1a.*/, '');
-            }
-            console.log(meta);
-            cols = meta.tInfo1;
-            var lines = $.terminal.split_equal(str, cols);
-            // one flush to output whole image to the screen
-            lines.map(line => term.echo(line, {flush: false}));
-            term.flush();
-        } else {
-            // should we wrap to 80 cols if there is no meta SAUCE data?
-            term.echo(str);
-        }
-        term.resume();
-    }
-
-    var term = $('#headter').terminal({
-        help: function() {
-            this.echo([
-                'use [[;#888;]ls] to display list of files and [[;#888;]cat]',
-                ' to display the artwork, you can also [[u;;]drag and drop] the file.',
-                '\nOnly Code Page 437 encoding files will work (classic demo s',
-                'cene files).\nType [[;#888;]credits] to show credits for ANSI',
-                ' Art works. Use tab so you don\'t need to type whole filename.',
-                '\nType [[;#888;]clear] to clear terminal.'
-            ].join(''), {keepWords: true});
-        },
-        cat: function(name) {
-            this.pause();
-            get_ansi(name).then(echo_ansi);
-        },
-        ls: function() {
-            console.log(files);
-            this.echo(files);
-        },
-        credits: function() {
-            this.echo('ANSI artworks taken from [[!;;;;https://fuel.wtf/packs/fuel27/]fuel magazine]')
-        }
-    }, {
-        completion: function(string, callback) {
-            if (this.get_command().match(/^cat /)) {
-                callback(files);
-            } else {
-                callback(['ls', 'file', 'credits', 'help']);
-            }
-        },
-        outputLimit: 250,
-        greetings: 'ANSI ART Terminal viewer\nType [[;#888;]help] for more info\n',
-        name: 'ansi'
-    }).drop(function(array_buff) { // drop plugin
-        echo_ansi(new Uint8Array(array_buff));
-        return term.read('press enter to continue ');
-    }, {
-        type: 'arraybuffer',
-        error: function(e) {
-            term.exception(e);
-        },
-        complete: function() {
-            term.echo('all files rendered');
-        }
-    });
-})();
-
-
   var term;
   jQuery(function($) {
       var id = 1;
@@ -323,20 +239,8 @@ var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
 }, {
     name: 'emoji',
     // detect iframe codepen preview
-    enabled: $('#aemoji').attr('onload') === undefined,
-    onInit: function() {
-        // in Window 10 it will render 8️⃣ as icon
-        // in other browsers you may render it as
-        // text
-        this.echo('type &#58;smiley&#58; or &#58;&#41; to render emoji :smiley:')
-            .echo('<span>You can also paste Unicode codepoints that create emoji ' +
-                  'like 8️⃣ to render <span style="width: 2ch" class="emoji eight" '+
-                  'data-text="8️⃣">8️⃣</span></span>', {raw: true, finalize: function(div) {
-                      div.removeClass('raw');
-                  }})
-            .echo('you need to wait a moment while we fetch emoji data')
-            .echo('to see available emoji type &#58;&lt;CHAR(S)&gt; and press tab twice')
-    },
+    enabled: $('body').attr('onload') === undefined,
+
     completion: function(string, callback) {
         if (string.match(/^:/)) {
             callback(names.map(function(name) {
@@ -344,8 +248,16 @@ var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
             }));
         }
     }
+
+
+
+
 });
 
+if (!term.enabled()) {
+    term.find('.cursor').addClass('blink');
+}
+var names = [];
 
 
         
@@ -353,16 +265,23 @@ var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
               term.echo("available commands are mysql, js, master");
           } else if (command == 'master'){
             
-            term.echo('Microbot Systems® - ^D to go back - Commands: ~$ help . ~$ admin . ~$ login . ~$ apikeys');
+            this.echo('Microbot Systems® :moon: - ^D to go back - Commands: >_help . >_admin . >_login . >_apikeys');
               term.push(function(command, term) {
                   if (command == '?') {
-                      term.echo('help msg');
+                    
+                    
+                    term.echo('help msg');
+                    this.echo('type &#58;smiley&#58; or &#58;&#41; to render emoji :smiley: :moon:')
+            .echo('<span>You can also paste Unicode codepoints that create emoji ' +
+                  'like 8️⃣ to render <span style="width: 2ch" class="emoji eight" '+
+                  'data-text="8️⃣">8️⃣</span></span>');
+                      
                   } else if (command == 'h') {
                       term.echo('help msg2');
                   }  else if (command == 'ping') {
                       term.echo('pong');
                   }  else if (command == 'srv') {
-                      term.echo('Web Development - 100$\nRESTFUL API - 500$        ');
+                      term.echo('Web Development - 100$\nRESTFUL API - 500$    \n'  + ':moon: :heart:');
                   } else {
                       term.echo('unknown command ' + command);
                   }
@@ -422,19 +341,28 @@ var url = 'https://terminal.jcubic.pl/ansi/read.php'; // CORS enabled
               term.echo("unknow command " + command);
           }
       }, {
-        greetings: 'Microbot Systems® - Commands: ~$ master . ~$ cdn . ~$ dev . ~$ api . ~$ store',
+        greetings: ':rocket: [[!guib;#fff;#000]MICROBOT SYSTEMS®]\n'+
+                  'Ahmed M. Sulaimani (C) 2018 - 2020\n'+
+                  'https://master.samabusiness.sa/\n\n'+
+                  '[[;#ff5050;]  COMMANDS >_master >_cdn >_dev >_api >_store]',
         width: '100%',
 
           onBlur: function() {
               // prevent loosing focus
               return false;
           }
+
       });
   });
-
-
-  
-      
+  jQuery(function($) {
+    $.get('https://unpkg.com/emoji-datasource').then(function(list) {
+    $.terminal.emoji(list);
+    names = list.map(function(emoji) { return emoji.short_name; });
+    term.refresh();
+});
+            
+        });
+    
       
 
     </script>
