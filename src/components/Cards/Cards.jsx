@@ -6,11 +6,11 @@ import AudiotrackSharpIcon from '@material-ui/icons/AudiotrackSharp';
 
 import styles from './Cards.module.css';
 
-const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => {
+const Cards = (props) => {
 
-/*if(!accountBalance) {
-  return 'Loading . . .';
-}*/
+// if(!accountBalance) {
+//   return 'Loading . . .';
+// }
   return (
     <div className={styles.container}>
       <Grid container spacing={3} justify="center">
@@ -20,10 +20,10 @@ const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => 
               Infected
             </Typography>
             <Typography variant="h5" component="h2">
-              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
+              <code>+ </code><CountUp start={0} end={ 54546  } duration={2.75} />
             </Typography>
             <Typography color="textSecondary">
-            { accountBalance } 
+      
             </Typography>
             <Typography variant="body2" component="p">
               My awesome card
@@ -37,10 +37,10 @@ const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => 
               Infected
             </Typography>
             <Typography variant="h5" component="h2">
-              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
+              <code>+ </code><CountUp start={0} end={ 4345 } duration={2.75} />
             </Typography>
             <Typography color="textSecondary">
-            { accountBalance } 
+            { 564654 } 
             </Typography>
             <Typography variant="body2" component="p">
               My awesome card
@@ -54,10 +54,10 @@ const Cards = ({ data:{ accountBalance, transactionAmount, accountNumber} }) => 
               Infected
             </Typography>
             <Typography variant="h5" component="h2">
-              <code>+ </code><CountUp start={0} end={ accountBalance } duration={2.75} />
+              <code>+ </code><CountUp start={0} end={ 45435 } duration={2.75} />
             </Typography>
             <Typography color="textSecondary">
-            { accountBalance } 
+            { 3453 } 
             </Typography>
             <Typography variant="body2" component="p">
               My awesome card

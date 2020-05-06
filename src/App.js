@@ -1,26 +1,27 @@
 import React from 'react';
 /*import logo from './logo.svg';*/
 import './App.css';
-/*import CountUp from 'react-countup';
 import { Cards, Drop, Boxes, Logo, Terminal } from './components';
+/*import CountUp from 'react-countup';
 import SettingsIcon from '@material-ui/icons/Settings';
 import serviceworker from './scope/serviceworker';
 import NoSsr from '@material-ui/core/NoSsr';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { palette, spacing, typography } from '@material-ui/system';
-import axios from 'axios';
-import $ from 'jquery';
-import { findDOMNode } from 'react-dom';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
+import { findDOMNode } from 'react-dom';
+import $ from 'jquery';
 import emoji from 'emoji-datasource';*/
+import axios from 'axios';
 import Icon from '@material-ui/core/Icon';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 
 const WrappedIcon = (props) => <Icon {...props} />;
 WrappedIcon.muiName = 'Icon';
 
-/*
+
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = 'https://api.samabusiness.sa/api/accounts/2';
 const urlapi = 'https://billowing-paper-4f03.sama.workers.dev/';
@@ -44,7 +45,7 @@ export const fetchApiUrl = async () => {
     return error;
   }
 };
-*/
+
 
 
 /*
@@ -67,43 +68,50 @@ class App extends React.Component {
   state = {
     stores: {},
   }
-  async componentDidMount() {/*
+  async componentDidMount() {
     const stores = await fetchStore();
     const fetchUrl = await fetchApiUrl();
     this.setState({ stores });
 
     const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
 console.log(senderName, accountBalance, receiverName, transactionAmount, accountNumber);
-console.log(fetchUrl);*/
+console.log(fetchUrl);
+ 
 
 
   }
   
 
 
-  // state = { store: ''};
+  //state = { store: ''};
   
 
-  // fetchStore = () => {
-  //   axios.get('https://api.samabusiness.sa/api/stores')
-  //   .then((response) => {
+ fetchStore = () => {
+   axios.get('https://api.samabusiness.sa/api/stores')
+   .then((response) => {
+   })
+   .catch((error) => {
+     console.log(error);
+   });
+ }
 
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-
-  
 
   render() {
-    /*const { stores } = this.state;
-    const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;*/
+    const { stores } = this.state;
+    //const { senderName, accountBalance, receiverName, transactionAmount, accountNumber } = stores;
     return (
       <div className="App">
-        <div id="maestro"></div>       
-        <div id="aemoji"></div>       
+        <Router>
+          <div>
+
+            <Route data={stores} path="/cards" component={Cards} />
+          </div>
+        </Router>
+        <div id="terminal"></div>
+
       </div>
+
+      
     );
   }
 }
